@@ -1,10 +1,11 @@
 import React from "react";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import reducers from "./reducers/index";
+import thunk from 'redux-thunk';
 
-export default props => {
+export default ({children, initialState = {}}) => {
   return (
-    <Provider store={createStore(reducers, {})}>{props.children}</Provider>
+    <Provider store={createStore(reducers, initialState, applyMiddleware(thunk))}>{children}</Provider>
   );
 };
